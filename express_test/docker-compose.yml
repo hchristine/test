@@ -1,0 +1,18 @@
+services:
+  products: 
+    build: 
+      context: products
+      dockerfile: Dockerfile
+    environment:
+      - DB_URI=postgresql://christine:pass@products_db:5432/products
+    volumes:
+      -./src/module/product:app/src
+      
+  products_db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=christine
+      - POSTGRES_DB=products
