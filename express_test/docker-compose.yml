@@ -4,9 +4,9 @@ services:
       context: products
       dockerfile: Dockerfile
     environment:
-      - DB_URI=postgresql://christine:pass@products_db:5432/products
+      - DB_URI=postgres://christine:pass@products_db:5432/products
     volumes:
-      -./src/module/product:app/src
+      -./src:app/src
       
   products_db:
     image: postgres

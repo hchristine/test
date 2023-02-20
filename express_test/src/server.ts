@@ -5,20 +5,22 @@ import { connect } from './database/connect';
 
 const app = express();
 const port = config.port ?? 3003;
+
 app.use(express.json());
 app.use('/products', router);
 
 export async function bootstrap() {
     try {
         await connect();
-        console.log("Database connected.")
+        console.log("Database connected.");
+        await start(port);
     }
     catch (error) {
         console.log("Unable to connect to the database: ", error)
     }
 }
 
-export async function start(port: string | number): Promise<void> {
+ async function start(port: string | number): Promise<void> {
     return new Promise((resolve) => {
         app.listen(port, () => {
             console.log(`Listening on port ${port}`);
@@ -27,6 +29,5 @@ export async function start(port: string | number): Promise<void> {
     });
 }
 
-start(port);
-bootstrap();
+ bootstrap();
 
