@@ -1,7 +1,6 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../../database/db";
+import { DataTypes, Sequelize } from "sequelize";
 
-export function defineProduct() {
+export function defineProduct(sequelize: Sequelize) {
     const Product = sequelize.define('product', {
         name: {
             type: DataTypes.STRING,
@@ -23,5 +22,3 @@ export function defineProduct() {
 
     return Product;
 }
-
-export default defineProduct();

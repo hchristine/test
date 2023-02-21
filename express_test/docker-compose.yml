@@ -1,18 +1,19 @@
 services:
-  products: 
-    build: 
-      context: products
-      dockerfile: Dockerfile
+  app:
+    build: .
     environment:
-      - DB_URI=postgres://christine:pass@products_db:5432/products
+      - DB_URI=postgres://christine:pass@db:5432/todos
+      - PORT=3000
+    ports:
+      - 3000:3000
     volumes:
-      -./src:app/src
-      
-  products_db:
+      - ./src:/app/src
+
+  db:
     image: postgres
     ports:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_USER=christine
-      - POSTGRES_DB=products
+      - POSTGRES_DB=todos

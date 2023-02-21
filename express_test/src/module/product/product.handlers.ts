@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import Product from './product.model';
+import db from "../../database/db";
 
 export async function createProduct(req: Request, res: Response) {
     const { name, title, description, price } = req.body;
 
     try {
-        const product = await Product.create({
+        const product = await db.tables.product.create({
             name,
             title,
             description,
@@ -22,7 +22,7 @@ export async function createProduct(req: Request, res: Response) {
 export async function editProduct(req: Request, res: Response) {
     try {
         const { id, title, description } = req.params;
-        const product = await Product.findOne({
+        const product = await db.tables.product.findOne({
             where: { id }
         });
 
@@ -43,7 +43,7 @@ export async function editProduct(req: Request, res: Response) {
 
 export async function deleteProduct(req: Request, res: Response) {
     try {
-        const product = await Product.findOne({
+        const product = await db.tables.product.findOne({
             where: {
                 id: req.params.id
             }
